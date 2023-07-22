@@ -11,6 +11,7 @@ export class InputComponent {
   @Input() control:FormControl = new FormControl()
   @Input() type='text'
   @Input() placeholder = ''
+  @Input() format=''
   
   
 

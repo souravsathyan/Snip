@@ -1,4 +1,10 @@
-<form [formGroup]="registerForm">
+<!-- alert -->
+<app-alert *ngIf="showAlert" [color]="alertColor">
+  {{alertMsg}}
+</app-alert>
+
+<!-- register form -->
+<form [formGroup]="registerForm" (ngSubmit)="register()">
   <!-- Name -->
   <div class="mb-3">
     <label class="inline-block mb-2">Name</label>
@@ -27,10 +33,10 @@
   <!-- Phone Number -->
   <div class="mb-3">
     <label class="inline-block mb-2">Phone Number</label>
-    
+    <app-input format="0000000000"  [control]="phoneNumber" type="phone" placeholder="Enter phonenumber"></app-input>
   </div>
   <button type="submit" class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
-              hover:bg-indigo-500">
+              hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400" [disabled]="registerForm.invalid">
     Submit
   </button>
 </form>
