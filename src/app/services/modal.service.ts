@@ -13,7 +13,6 @@ export class ModalService {
   constructor(){}
 
   isModalOpen(id:string):boolean{
-    console.log(this.modals)
     return !!this.modals.find(el=>el.id===el.id)?.visible
   }
 
@@ -30,4 +29,14 @@ export class ModalService {
       visible:false
     })
   }
+
+  //removing the id from the array so it will not be added again
+  //fixed memory leak
+  unregister(id:string){
+    this.modals = this.modals.filter(
+      el => el.id !== id
+    )
+  }
+  
+
 }
