@@ -2,7 +2,24 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+import { enableProdMode } from '@angular/core';
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 
-//bootstrap module function load our app and angular features
-platformBrowserDynamic().bootstrapModule(AppModule)
+if(environment.production){
+  enableProdMode()
+}
+firebase.initializeApp(environment.firebase)
+
+let appInit =false
+firebase.auth().onAuthStateChanged(()=>{
+  if(!appInit){
+    //bootstrap module function load our app and angular features
+  platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+  }
+  appInit=true
+})
+
+
